@@ -156,7 +156,7 @@
     <script>
         function extractDescription(body) {
             // Extract a clean description from markdown release notes
-            if (!body) return 'Latest release of SPARK CLI';
+            if (!body) return 'Initial beta release of SPARK CLI with core workspace management functionality.';
             
             // Remove markdown headers (##, ###)
             let text = body.replace(/^#{1,6}\s+/gm, '');
@@ -170,22 +170,31 @@
             // Remove markdown links but keep text
             text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
             
-            // Remove bullet points and dashes
+            // Remove bullet points and dashes but keep content
             text = text.replace(/^[\s]*[-*+]\s+/gm, '');
             
-            // Remove extra whitespace and newlines
-            text = text.replace(/\n+/g, ' ').trim();
+            // Clean up extra whitespace
+            text = text.replace(/\s+/g, ' ').trim();
             
-            // Get first meaningful sentence
-            const sentences = text.split(/[.!?]+/);
-            const firstSentence = sentences.find(s => s.trim().length > 10);
+            // Look for meaningful content after cleaning
+            const meaningfulParts = text.split(/[.!]\s+/).filter(part => {
+                const clean = part.trim();
+                return clean.length > 20 && 
+                       !clean.match(/^(Installation|Platform Downloads|What's New|Requirements)$/i) &&
+                       !clean.includes('SPARK CLI v');
+            });
             
-            if (firstSentence && firstSentence.trim().length > 0) {
-                return firstSentence.trim() + '.';
+            if (meaningfulParts.length > 0) {
+                return meaningfulParts[0].trim() + '.';
             }
             
-            // Fallback to first 100 characters
-            return text.substring(0, 100).trim() + (text.length > 100 ? '...' : '');
+            // Fallback: look for description in bullet points
+            if (text.includes('Initial') && text.includes('release')) {
+                return 'Initial beta release of SPARK CLI with core workspace management functionality.';
+            }
+            
+            // Final fallback
+            return 'Latest release of SPARK CLI with enhanced features and improvements.';
         }
 
         async function loadReleases() {
