@@ -79,6 +79,23 @@ fi
 
 # Install the binary globally
 echo "📦 Installing binary to /usr/local/bin..."
+
+# Handle case where binary is currently running
+if [ -f "/usr/local/bin/spark" ]; then
+    echo "🔄 Existing installation detected, attempting to replace..."
+    
+    # Try to stop any running processes (optional, but helpful)
+    sudo pkill -f "spark" 2>/dev/null || true
+    
+    # Remove existing binary first
+    sudo rm -f /usr/local/bin/spark 2>/dev/null || {
+        echo "⚠️  Cannot remove existing binary (may be in use)"
+        echo "💡 Please stop any running SPARK processes and try again"
+        echo "   Or run: sudo pkill -f spark && sudo rm /usr/local/bin/spark"
+        exit 1
+    }
+fi
+
 sudo cp dist/spark /usr/local/bin/spark
 sudo chmod +x /usr/local/bin/spark
 
