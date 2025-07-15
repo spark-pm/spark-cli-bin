@@ -154,47 +154,108 @@
     </div>
 
     <script>
-        function extractDescription(body) {
-            // Extract a clean description from markdown release notes
-            if (!body) return 'Initial beta release of SPARK CLI with core workspace management functionality.';
+        // Utility function to parse markdown to plain text
+        function parseMarkdownToText(markdown) {
+            if (!markdown) return '';
             
-            // Remove markdown headers (##, ###)
-            let text = body.replace(/^#{1,6}\s+/gm, '');
+            let text = markdown;
             
-            // Remove code blocks
+            // Remove HTML tags
+            text = text.replace(/<[^>]*>/g, '');
+            
+            // Remove code blocks (fenced and indented)
             text = text.replace(/```[\s\S]*?```/g, '');
+            text = text.replace(/^\s{4,}.*$/gm, '');
             
             // Remove inline code
-            text = text.replace(/`[^`]+`/g, '');
+            text = text.replace(/`([^`]*)`/g, '$1');
             
-            // Remove markdown links but keep text
-            text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+            // Convert headers to text (remove # symbols)
+            text = text.replace(/^#{1,6}\s+(.*)$/gm, '$1');
             
-            // Remove bullet points and dashes but keep content
-            text = text.replace(/^[\s]*[-*+]\s+/gm, '');
+            // Convert markdown links to just the text
+            text = text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
             
-            // Clean up extra whitespace
-            text = text.replace(/\s+/g, ' ').trim();
+            // Convert reference links
+            text = text.replace(/\[([^\]]*)\]\[[^\]]*\]/g, '$1');
             
-            // Look for meaningful content after cleaning
-            const meaningfulParts = text.split(/[.!]\s+/).filter(part => {
-                const clean = part.trim();
-                return clean.length > 20 && 
-                       !clean.match(/^(Installation|Platform Downloads|What's New|Requirements)$/i) &&
-                       !clean.includes('SPARK CLI v');
-            });
+            // Remove link definitions
+            text = text.replace(/^\[[^\]]*\]:\s*.*$/gm, '');
             
-            if (meaningfulParts.length > 0) {
-                return meaningfulParts[0].trim() + '.';
+            // Convert emphasis (bold/italic) to plain text
+            text = text.replace(/\*\*\*([^*]*)\*\*\*/g, '$1'); // bold italic
+            text = text.replace(/\*\*([^*]*)\*\*/g, '$1');     // bold
+            text = text.replace(/\*([^*]*)\*/g, '$1');         // italic
+            text = text.replace(/___([^_]*)___/g, '$1');       // bold italic
+            text = text.replace(/__([^_]*)__/g, '$1');         // bold
+            text = text.replace(/_([^_]*)_/g, '$1');           // italic
+            
+            // Remove strikethrough
+            text = text.replace(/~~([^~]*)~~/g, '$1');
+            
+            // Convert blockquotes
+            text = text.replace(/^>\s*/gm, '');
+            
+            // Remove horizontal rules
+            text = text.replace(/^[-*_]{3,}\s*$/gm, '');
+            
+            // Convert unordered lists to plain text
+            text = text.replace(/^[\s]*[-*+]\s+/gm, '• ');
+            
+            // Convert ordered lists to plain text
+            text = text.replace(/^[\s]*\d+\.\s+/gm, '• ');
+            
+            // Remove extra whitespace and normalize line breaks
+            text = text.replace(/\n\s*\n/g, '\n'); // Remove empty lines
+            text = text.replace(/[ \t]+/g, ' ');   // Normalize spaces
+            text = text.replace(/^\s+|\s+$/gm, ''); // Trim lines
+            
+            return text.trim();
+        }
+
+        function extractDescription(body) {
+            if (!body) return 'Latest release of SPARK CLI';
+            
+            // Parse markdown to clean text
+            const plainText = parseMarkdownToText(body);
+            
+            // Split into sentences and find first meaningful one
+            const sentences = plainText
+                .split(/[.!?]+/)
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+            
+            for (const sentence of sentences) {
+                // Skip common header-like text
+                if (sentence.match(/^(SPARK CLI|Installation|Platform Downloads|What's New|Requirements|Full Changelog)/i)) {
+                    continue;
+                }
+                
+                // Return first substantial sentence
+                if (sentence.length >= 15 && sentence.length <= 150) {
+                    return sentence + '.';
+                }
             }
             
-            // Fallback: look for description in bullet points
-            if (text.includes('Initial') && text.includes('release')) {
-                return 'Initial beta release of SPARK CLI with core workspace management functionality.';
+            // Fallback: look for bullet points with meaningful content
+            const lines = plainText.split('\n').filter(line => line.trim());
+            for (const line of lines) {
+                const clean = line.replace(/^•\s*/, '').trim();
+                if (clean.length >= 20 && clean.length <= 100 && 
+                    !clean.match(/^(Linux|macOS|Windows|Internet|No runtime|SPARK CLI)/i)) {
+                    return clean;
+                }
             }
             
             // Final fallback
-            return 'Latest release of SPARK CLI with enhanced features and improvements.';
+            const firstParagraph = plainText.split('\n')[0];
+            if (firstParagraph && firstParagraph.length > 10) {
+                return firstParagraph.length > 100 
+                    ? firstParagraph.substring(0, 100).trim() + '...'
+                    : firstParagraph;
+            }
+            
+            return 'Latest release of SPARK CLI';
         }
 
         async function loadReleases() {
