@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARK CLI Releases</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #0f0f0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #06b6d4;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: #a1a1aa;
+            font-size: 1.1em;
+        }
+        .install-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        .install-code {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            color: #06b6d4;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+        .releases {
+            margin-top: 40px;
+        }
+        .release {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .release-version {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #06b6d4;
+            margin-bottom: 8px;
+        }
+        .release-date {
+            color: #a1a1aa;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+        .download-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .download-link {
+            background: #06b6d4;
+            color: #000;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+        .download-link:hover {
+            background: #0891b2;
+        }
+        .beta-badge {
+            background: #f59e0b;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        .coming-soon {
+            background: #334155;
+            color: #94a3b8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px dashed #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">⚡ SPARK CLI</div>
+        <div class="tagline">Swift Product Acceleration through Rapid Knowledge</div>
+    </div>
+
+    <div class="install-section">
+        <h2>🚀 Quick Install</h2>
+        <p>Install SPARK CLI with a single command:</p>
+        <div class="install-code">curl -fsSL https://releases.sparkpm.dev/install.sh | bash</div>
+        <p><strong>Supported platforms:</strong> Linux (x64, arm64), macOS (x64, arm64)</p>
+    </div>
+
+    <div class="releases">
+        <h2>📦 Releases</h2>
+        
+        <div class="release">
+            <div class="release-version">
+                v0.1.0-beta.1
+                <span class="beta-badge">BETA</span>
+            </div>
+            <div class="release-date">Beta Release • TBD</div>
+            <p>First beta release of SPARK CLI with core workspace management, task tracking, and OKR functionality.</p>
+            
+            <div class="coming-soon">
+                <strong>🚧 Coming Soon</strong><br>
+                Binaries will be available here once the beta release is ready.
+            </div>
+            
+            <div class="download-links" style="display: none;">
+                <a href="/latest/spark-linux-x64" class="download-link">Linux x64</a>
+                <a href="/latest/spark-linux-arm64" class="download-link">Linux ARM64</a>
+                <a href="/latest/spark-darwin-x64" class="download-link">macOS Intel</a>
+                <a href="/latest/spark-darwin-arm64" class="download-link">macOS Apple Silicon</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="install-section">
+        <h3>📖 What's SPARK?</h3>
+        <p>SPARK is a lightweight project management framework designed for high-velocity teams of 1-30 people. The CLI provides:</p>
+        <ul>
+            <li><strong>Workspace Management</strong> - Initialize and manage team workspaces</li>
+            <li><strong>Task Tracking</strong> - Kanban-style task management with pull-based workflow</li>
+            <li><strong>OKR Management</strong> - Quarterly objectives and key results tracking</li>
+            <li><strong>Team Collaboration</strong> - Multi-user workspaces with real-time sync</li>
+            <li><strong>AI-Agent Friendly</strong> - Designed for integration with AI development workflows</li>
+        </ul>
+        <p><a href="https://sparkpm.dev" style="color: #06b6d4;">Learn more about SPARK Framework →</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARK CLI v0.1.0-beta.1 Release Notes</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #0f0f0f;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+        .version {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #06b6d4;
+            margin-bottom: 10px;
+        }
+        .beta-badge {
+            background: #f59e0b;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.6em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        .section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        .section h2 {
+            color: #06b6d4;
+            margin-top: 0;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list li:before {
+            content: "✨ ";
+            color: #06b6d4;
+            font-weight: bold;
+        }
+        .code {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            color: #06b6d4;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+        .warning {
+            background: #7c2d12;
+            border: 1px solid #dc2626;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .back-link {
+            color: #06b6d4;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="version">
+            v0.1.0-beta.1
+            <span class="beta-badge">BETA</span>
+        </div>
+        <p>First beta release of SPARK CLI</p>
+        <p><a href="/" class="back-link">← Back to Releases</a></p>
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ Beta Release Notice</strong><br>
+        This is a beta release for testing purposes. Features may be incomplete or unstable. 
+        Not recommended for production use.
+    </div>
+
+    <div class="section">
+        <h2>🚀 New Features</h2>
+        <ul class="feature-list">
+            <li><strong>Workspace Management</strong> - Initialize and configure SPARK workspaces</li>
+            <li><strong>Task Management</strong> - Create, list, and move tasks through Kanban workflow</li>
+            <li><strong>OKR Management</strong> - Set quarterly objectives and track key results</li>
+            <li><strong>Authentication</strong> - OAuth2 device flow integration with SPARK server</li>
+            <li><strong>Board Visualization</strong> - Terminal-based Kanban board display</li>
+            <li><strong>Configuration System</strong> - Workspace-scoped configuration management</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📋 Available Commands</h2>
+        <div class="code">spark init                    # Initialize workspace
+spark auth login               # Authenticate with server
+spark board                    # View Kanban board
+spark task create "Task name"  # Create new task
+spark task pull                # Pull task from backlog
+spark task list                # List all tasks
+spark okr create               # Create OKRs
+spark okr status               # View OKR progress</div>
+    </div>
+
+    <div class="section">
+        <h2>💻 Installation</h2>
+        <div class="code">curl -fsSL https://releases.sparkpm.dev/install.sh | bash</div>
+        <p>Supports Linux and macOS on x64 and ARM64 architectures.</p>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Technical Details</h2>
+        <ul>
+            <li><strong>Runtime:</strong> Standalone binary (no dependencies)</li>
+            <li><strong>Size:</strong> ~99MB (includes Bun runtime)</li>
+            <li><strong>Server:</strong> Connects to sparkpm.dev</li>
+            <li><strong>Config:</strong> Local workspace configuration (.spark/)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🐛 Known Issues</h2>
+        <ul>
+            <li>Limited error handling for network connectivity issues</li>
+            <li>Task descriptions limited to single line</li>
+            <li>No offline mode support yet</li>
+            <li>Windows support not yet available</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🚧 What's Next</h2>
+        <ul>
+            <li>Windows binary support</li>
+            <li>Enhanced error handling and user experience</li>
+            <li>Task templates and automation</li>
+            <li>Integration with external tools</li>
+            <li>Performance optimizations</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🤝 Feedback</h2>
+        <p>This is a beta release - your feedback is crucial! Please report issues and suggestions.</p>
+        <p>Connect with the SPARK team through the main platform at <a href="https://sparkpm.dev" class="back-link">sparkpm.dev</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 SPARK Framework Documentation
+    url: https://sparkpm.dev
+    about: Learn about the SPARK Framework and its principles
+  - name: 💬 Community Discussions
+    url: https://github.com/spark-pm/spark-cli-bin/discussions
+    about: Ask questions, share ideas, and connect with the community
+  - name: 🔒 Security Issues
+    url: mailto:security@sparkpm.dev
+    about: Report security vulnerabilities privately

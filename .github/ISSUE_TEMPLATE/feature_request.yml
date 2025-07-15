@@ -1,0 +1,101 @@
+name: 💡 Feature Request
+description: Suggest a new feature or enhancement for SPARK CLI
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new feature! Please provide details about what you'd like to see added to SPARK CLI.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - Task Management
+        - OKR Management
+        - Board/Visualization
+        - Authentication
+        - Configuration
+        - Installation/Distribution
+        - Performance
+        - Developer Experience
+        - Integration
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A brief, clear summary of the feature you're requesting
+      placeholder: "Add ability to create task templates..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem/Use Case
+      description: What problem does this feature solve? What's your use case?
+      placeholder: |
+        Currently, when creating tasks, I have to manually enter the same information repeatedly...
+        This would help teams that frequently create similar types of tasks...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe how you envision this feature working
+      placeholder: |
+        Add a `spark task template create` command that allows saving task templates...
+        Then `spark task create --template <name>` could use the template...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Are there alternative ways to solve this problem?
+      placeholder: "Could also be solved by..."
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Usage Examples
+      description: Show how this feature would be used in practice
+      render: shell
+      placeholder: |
+        $ spark task template create "bug-fix" --description "Fix bug in {component}"
+        $ spark task create --template "bug-fix" --component "authentication"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would be helpful
+        - High - Important for my workflow
+        - Critical - Blocking my usage
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues to make sure this is not a duplicate
+          required: true
+        - label: This feature aligns with SPARK Framework principles (simple, fast, effective)
+          required: true
+        - label: I would be willing to help test this feature if implemented
+          required: false

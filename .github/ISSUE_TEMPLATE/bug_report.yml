@@ -1,0 +1,117 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with SPARK CLI
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us diagnose and fix the issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: SPARK CLI Version
+      description: Run `spark --version` to get this information
+      placeholder: "v0.1.0-beta.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What operating system are you using?
+      options:
+        - Linux (x64)
+        - Linux (ARM64)
+        - macOS (Intel)
+        - macOS (Apple Silicon)
+        - Windows (not officially supported)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation Method
+      description: How did you install SPARK CLI?
+      options:
+        - One-liner install script
+        - Manual download
+        - Built from source
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: "When I run 'spark board', I get an error..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions to reproduce the bug
+      placeholder: |
+        1. Run `spark init`
+        2. Run `spark auth login`
+        3. Run `spark board`
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: "The board should display without errors"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened instead
+      placeholder: "Error message appears and command fails"
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Error Output
+      description: Copy and paste any error messages or output
+      render: shell
+      placeholder: "Paste error messages here..."
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: |
+        If relevant, share your configuration files (remove any sensitive information):
+        - `.spark/config.json`
+        - `.spark/local/config.json`
+      render: json
+      placeholder: "Paste configuration here (remove sensitive data)..."
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues to make sure this is not a duplicate
+          required: true
+        - label: I have removed any sensitive information from the report
+          required: true
+        - label: I am using a supported platform (Linux/macOS)
+          required: false

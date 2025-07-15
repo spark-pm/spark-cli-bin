@@ -1,0 +1,121 @@
+name: 📦 Installation Issue
+description: Report problems with installing or running SPARK CLI
+title: "[Install]: "
+labels: ["installation", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Having trouble installing or running SPARK CLI? Please provide the information below to help us assist you.
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What operating system are you using?
+      options:
+        - Linux (x64)
+        - Linux (ARM64)
+        - macOS (Intel)
+        - macOS (Apple Silicon)
+        - Windows (not officially supported)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS Version
+      description: Specific version (e.g., Ubuntu 22.04, macOS 13.0, etc.)
+      placeholder: "Ubuntu 22.04"
+
+  - type: dropdown
+    id: method
+    attributes:
+      label: Installation Method Attempted
+      description: How did you try to install SPARK CLI?
+      options:
+        - One-liner install script (curl | bash)
+        - Manual download from releases
+        - Building from source
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command Used
+      description: What exact command did you run?
+      render: shell
+      placeholder: "curl -fsSL https://releases.sparkpm.dev/install.sh | bash"
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Output
+      description: Copy and paste the full error message or output
+      render: shell
+      placeholder: "Paste the complete error output here..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Installation Stage
+      description: At what stage did the installation fail?
+      options:
+        - Download (can't download install script)
+        - Platform detection (script can't detect OS/architecture)
+        - Binary download (can't download CLI binary)
+        - Installation (can't copy to /usr/local/bin)
+        - Verification (binary won't run)
+        - First use (installed but commands fail)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Information
+      description: |
+        Please run these commands and paste the output:
+        ```bash
+        uname -a
+        which curl
+        which wget
+        ls -la /usr/local/bin/spark
+        spark --version  # if partially installed
+        ```
+      render: shell
+      placeholder: "Paste environment information here..."
+
+  - type: checkboxes
+    id: troubleshooting
+    attributes:
+      label: Troubleshooting Steps Tried
+      description: Which of these have you already tried?
+      options:
+        - label: Restarted terminal/shell
+        - label: Tried with sudo permissions
+        - label: Checked internet connectivity
+        - label: Tried manual download instead of script
+        - label: Checked PATH environment variable
+        - label: Tried different terminal/shell
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues for similar installation problems
+          required: true
+        - label: I am using a supported platform (Linux/macOS)
+          required: false
+        - label: I can provide additional debugging information if needed
+          required: true
