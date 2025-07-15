@@ -17,9 +17,9 @@ $arch = if ([Environment]::Is64BitOperatingSystem) { "x64" } else {
     exit 1
 }
 
-# Download binary
+# Download binary from GitHub releases
 $binaryName = "spark-windows-$arch.exe"
-$downloadUrl = "https://releases.sparkpm.dev/latest/$binaryName"
+$downloadUrl = "https://github.com/spark-pm/spark-cli-bin/releases/latest/download/$binaryName"
 
 Write-Host "📥 Downloading $binaryName..." -ForegroundColor Yellow
 

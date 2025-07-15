@@ -38,9 +38,9 @@ else
         exit 1
     fi
     
-    # Download binary
+    # Download binary from GitHub releases
     BINARY_NAME="spark-$OS-$ARCH"
-    DOWNLOAD_URL="https://releases.sparkpm.dev/latest/$BINARY_NAME"
+    DOWNLOAD_URL="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/$BINARY_NAME"
     
     echo "📥 Downloading $BINARY_NAME..."
     
