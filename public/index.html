@@ -283,7 +283,7 @@
                     .join('');
                 
                 const fallbackLinks = availablePlatforms
-                    .map(platform => `<a href="/latest/${platform.file}" class="download-link">${platform.name}</a>`)
+                    .map(platform => `<a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/${platform.file}" class="download-link">${platform.name}</a>`)
                     .join('');
                 
                 container.innerHTML = `
@@ -318,9 +318,10 @@
                         <p>Unable to load release information. View releases directly on GitHub.</p>
                         <div class="download-links">
                             <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest" class="download-link">View Latest Release</a>
-                            <a href="/latest/spark-linux-x64" class="download-link">Linux x64</a>
-                            <a href="/latest/spark-darwin-x64" class="download-link">macOS Intel</a>
-                            <a href="/latest/spark-darwin-arm64" class="download-link">macOS Apple Silicon</a>
+                            <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-linux-x64" class="download-link">Linux x64</a>
+                            <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-darwin-x64" class="download-link">macOS Intel</a>
+                            <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-darwin-arm64" class="download-link">macOS Apple Silicon</a>
+                            <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-windows-x64.exe" class="download-link">Windows x64</a>
                         </div>
                     </div>
                 `;

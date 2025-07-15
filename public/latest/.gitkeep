@@ -1,9 +1,0 @@
-# Placeholder for latest binary releases
-# 
-# This directory will contain symlinks or copies of the latest version binaries:
-# - spark-linux-x64
-# - spark-linux-arm64  
-# - spark-darwin-x64
-# - spark-darwin-arm64
-#
-# These files should be updated when a new release is published.
