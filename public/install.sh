@@ -3,8 +3,33 @@
 # SPARK CLI Installation Script
 # Installs the pre-built SPARK CLI binary globally on your system
 # No runtime dependencies required!
+#
+# Usage:
+#   curl -fsSL https://releases.sparkpm.dev/install.sh | bash
+#   curl -fsSL https://releases.sparkpm.dev/install.sh | bash -s -- --beta
+#   curl -fsSL https://releases.sparkpm.dev/install.sh | bash -s -- --latest
 
 set -e
+
+# Parse arguments
+RELEASE_TYPE="auto"
+for arg in "$@"; do
+    case $arg in
+        --beta)
+            RELEASE_TYPE="beta"
+            shift
+            ;;
+        --latest)
+            RELEASE_TYPE="latest"
+            shift
+            ;;
+        *)
+            echo "❌ Unknown argument: $arg"
+            echo "Usage: $0 [--latest|--beta]"
+            exit 1
+            ;;
+    esac
+done
 
 echo "🚀 Installing SPARK CLI..."
 
@@ -28,9 +53,37 @@ if [ "$OS" != "linux" ] && [ "$OS" != "darwin" ]; then
     exit 1
 fi
 
+# Get appropriate release based on type
+echo "🔍 Finding appropriate release..."
+
+if [ "$RELEASE_TYPE" = "latest" ]; then
+    # Get latest non-prerelease
+    echo "🎯 Looking for latest stable release..."
+    LATEST_TAG=$(curl -s https://api.github.com/repos/spark-pm/spark-cli-bin/releases | grep -A5 '"prerelease": false' | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"//;s/".*//')
+    
+    if [ -z "$LATEST_TAG" ]; then
+        echo "⚠️  No stable releases found, falling back to latest beta..."
+        RELEASE_TYPE="beta"
+    fi
+fi
+
+if [ "$RELEASE_TYPE" = "beta" ] || [ "$RELEASE_TYPE" = "auto" ]; then
+    # Get latest release (including prereleases)
+    echo "🧪 Looking for latest beta release..."
+    LATEST_TAG=$(curl -s https://api.github.com/repos/spark-pm/spark-cli-bin/releases | grep -o '"tag_name": *"[^"]*"' | head -1 | sed 's/"tag_name": *"//;s/"//')
+fi
+
+if [ -z "$LATEST_TAG" ]; then
+    echo "❌ Could not find any releases!"
+    echo "📥 Please download manually from: https://releases.sparkpm.dev"
+    exit 1
+fi
+
+echo "📦 Selected release: $LATEST_TAG"
+
 # Download binary from GitHub releases
 BINARY_NAME="spark-$OS-$ARCH"
-DOWNLOAD_URL="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/$BINARY_NAME"
+DOWNLOAD_URL="https://github.com/spark-pm/spark-cli-bin/releases/download/$LATEST_TAG/$BINARY_NAME"
 
 echo "📥 Downloading $BINARY_NAME..."
 
