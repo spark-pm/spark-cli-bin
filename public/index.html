@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPARK CLI Releases</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -106,6 +107,61 @@
             margin: 20px 0;
             border: 1px dashed #475569;
         }
+        
+        /* Styles for markdown-generated content */
+        .release-content {
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        .release-content h2 {
+            color: #06b6d4;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+            margin: 20px 0 12px 0;
+            font-size: 1.2em;
+        }
+        .release-content h3 {
+            color: #06b6d4;
+            margin: 16px 0 8px 0;
+            font-size: 1.1em;
+        }
+        .release-content ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        .release-content li {
+            margin: 4px 0;
+            color: #d4d4d8;
+        }
+        .release-content strong {
+            color: #fbbf24;
+        }
+        .release-content code {
+            background: #000;
+            color: #06b6d4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        .release-content pre {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        .release-content pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+        }
+        .release-content hr {
+            border: none;
+            border-top: 1px solid #333;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -154,108 +210,21 @@
     </div>
 
     <script>
-        // Utility function to parse markdown to plain text
-        function parseMarkdownToText(markdown) {
+        // Convert markdown to HTML using ShowdownJS
+        function convertMarkdownToHtml(markdown) {
             if (!markdown) return '';
             
-            let text = markdown;
+            // Initialize ShowdownJS converter
+            const converter = new showdown.Converter({
+                headerLevelStart: 2,  // Start headers at h2 level
+                simplifiedAutoLink: true,
+                excludeTrailingPunctuationFromURLs: true,
+                strikethrough: true,
+                tables: true,
+                tasklists: true
+            });
             
-            // Remove HTML tags
-            text = text.replace(/<[^>]*>/g, '');
-            
-            // Remove code blocks (fenced and indented)
-            text = text.replace(/```[\s\S]*?```/g, '');
-            text = text.replace(/^\s{4,}.*$/gm, '');
-            
-            // Remove inline code
-            text = text.replace(/`([^`]*)`/g, '$1');
-            
-            // Convert headers to text (remove # symbols)
-            text = text.replace(/^#{1,6}\s+(.*)$/gm, '$1');
-            
-            // Convert markdown links to just the text
-            text = text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
-            
-            // Convert reference links
-            text = text.replace(/\[([^\]]*)\]\[[^\]]*\]/g, '$1');
-            
-            // Remove link definitions
-            text = text.replace(/^\[[^\]]*\]:\s*.*$/gm, '');
-            
-            // Convert emphasis (bold/italic) to plain text
-            text = text.replace(/\*\*\*([^*]*)\*\*\*/g, '$1'); // bold italic
-            text = text.replace(/\*\*([^*]*)\*\*/g, '$1');     // bold
-            text = text.replace(/\*([^*]*)\*/g, '$1');         // italic
-            text = text.replace(/___([^_]*)___/g, '$1');       // bold italic
-            text = text.replace(/__([^_]*)__/g, '$1');         // bold
-            text = text.replace(/_([^_]*)_/g, '$1');           // italic
-            
-            // Remove strikethrough
-            text = text.replace(/~~([^~]*)~~/g, '$1');
-            
-            // Convert blockquotes
-            text = text.replace(/^>\s*/gm, '');
-            
-            // Remove horizontal rules
-            text = text.replace(/^[-*_]{3,}\s*$/gm, '');
-            
-            // Convert unordered lists to plain text
-            text = text.replace(/^[\s]*[-*+]\s+/gm, '• ');
-            
-            // Convert ordered lists to plain text
-            text = text.replace(/^[\s]*\d+\.\s+/gm, '• ');
-            
-            // Remove extra whitespace and normalize line breaks
-            text = text.replace(/\n\s*\n/g, '\n'); // Remove empty lines
-            text = text.replace(/[ \t]+/g, ' ');   // Normalize spaces
-            text = text.replace(/^\s+|\s+$/gm, ''); // Trim lines
-            
-            return text.trim();
-        }
-
-        function extractDescription(body) {
-            if (!body) return 'Latest release of SPARK CLI';
-            
-            // Parse markdown to clean text
-            const plainText = parseMarkdownToText(body);
-            
-            // Split into sentences and find first meaningful one
-            const sentences = plainText
-                .split(/[.!?]+/)
-                .map(s => s.trim())
-                .filter(s => s.length > 0);
-            
-            for (const sentence of sentences) {
-                // Skip common header-like text
-                if (sentence.match(/^(SPARK CLI|Installation|Platform Downloads|What's New|Requirements|Full Changelog)/i)) {
-                    continue;
-                }
-                
-                // Return first substantial sentence
-                if (sentence.length >= 15 && sentence.length <= 150) {
-                    return sentence + '.';
-                }
-            }
-            
-            // Fallback: look for bullet points with meaningful content
-            const lines = plainText.split('\n').filter(line => line.trim());
-            for (const line of lines) {
-                const clean = line.replace(/^•\s*/, '').trim();
-                if (clean.length >= 20 && clean.length <= 100 && 
-                    !clean.match(/^(Linux|macOS|Windows|Internet|No runtime|SPARK CLI)/i)) {
-                    return clean;
-                }
-            }
-            
-            // Final fallback
-            const firstParagraph = plainText.split('\n')[0];
-            if (firstParagraph && firstParagraph.length > 10) {
-                return firstParagraph.length > 100 
-                    ? firstParagraph.substring(0, 100).trim() + '...'
-                    : firstParagraph;
-            }
-            
-            return 'Latest release of SPARK CLI';
+            return converter.makeHtml(markdown);
         }
 
         async function loadReleases() {
@@ -309,10 +278,13 @@
                             ${isPrerelease ? '<span class="beta-badge">BETA</span>' : ''}
                         </div>
                         <div class="release-date">Published ${publishedDate}</div>
-                        <p>${latest.body ? extractDescription(latest.body) : 'Latest release of SPARK CLI'}</p>
+                        
+                        <div class="release-content">
+                            ${latest.body ? convertMarkdownToHtml(latest.body) : '<p>Latest release of SPARK CLI</p>'}
+                        </div>
                         
                         <div class="download-links">
-                            <a href="${latest.html_url}" class="download-link">View Release Notes</a>
+                            <a href="${latest.html_url}" class="download-link">View on GitHub</a>
                             ${downloadLinks || fallbackLinks}
                         </div>
                     </div>
