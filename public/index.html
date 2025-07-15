@@ -194,8 +194,14 @@
     <div class="install-section">
         <h2>🚀 Quick Install</h2>
         <p>Install SPARK CLI with a single command:</p>
+        
+        <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Linux & macOS</h3>
         <div class="install-code">curl -fsSL https://releases.sparkpm.dev/install.sh | bash</div>
-        <p><strong>Supported platforms:</strong> Linux (x64, arm64), macOS (x64, arm64)</p>
+        
+        <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Windows (PowerShell)</h3>
+        <div class="install-code">irm https://releases.sparkpm.dev/install.ps1 | iex</div>
+        
+        <p><strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64), Windows (x64)</p>
     </div>
 
     <div class="releases">
@@ -264,7 +270,8 @@
                 const availablePlatforms = [
                     { name: 'Linux x64', file: 'spark-linux-x64' },
                     { name: 'macOS Intel', file: 'spark-darwin-x64' },
-                    { name: 'macOS Apple Silicon', file: 'spark-darwin-arm64' }
+                    { name: 'macOS Apple Silicon', file: 'spark-darwin-arm64' },
+                    { name: 'Windows x64', file: 'spark-windows-x64.exe' }
                 ];
                 
                 const downloadLinks = availablePlatforms
