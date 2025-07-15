@@ -198,10 +198,11 @@
         <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Linux & macOS</h3>
         <div class="install-code">curl -fsSL https://releases.sparkpm.dev/install.sh | bash</div>
         
-        <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Windows (PowerShell)</h3>
-        <div class="install-code">irm https://releases.sparkpm.dev/install.ps1 | iex</div>
+        <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Windows (WSL)</h3>
+        <div class="install-code"># First install WSL, then run the Linux command above</div>
         
-        <p><strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64), Windows (x64)</p>
+        <p><strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64)</p>
+        <p><strong>Windows users:</strong> Please use <a href="https://docs.microsoft.com/en-us/windows/wsl/install" style="color: #06b6d4;">Windows Subsystem for Linux (WSL)</a> and follow the Linux installation instructions.</p>
     </div>
 
     <div class="releases">
@@ -270,8 +271,7 @@
                 const availablePlatforms = [
                     { name: 'Linux x64', file: 'spark-linux-x64' },
                     { name: 'macOS Intel', file: 'spark-darwin-x64' },
-                    { name: 'macOS Apple Silicon', file: 'spark-darwin-arm64' },
-                    { name: 'Windows x64', file: 'spark-windows-x64.exe' }
+                    { name: 'macOS Apple Silicon', file: 'spark-darwin-arm64' }
                 ];
                 
                 const downloadLinks = availablePlatforms
@@ -321,7 +321,6 @@
                             <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-linux-x64" class="download-link">Linux x64</a>
                             <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-darwin-x64" class="download-link">macOS Intel</a>
                             <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-darwin-arm64" class="download-link">macOS Apple Silicon</a>
-                            <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/spark-windows-x64.exe" class="download-link">Windows x64</a>
                         </div>
                     </div>
                 `;
