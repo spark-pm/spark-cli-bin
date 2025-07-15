@@ -124,24 +124,18 @@
     <div class="releases">
         <h2>📦 Releases</h2>
         
+        <div id="loading" class="release">
+            <div class="release-version">Loading Releases...</div>
+            <p>Fetching latest release information from GitHub...</p>
+        </div>
+        
+        <div id="releases-container"></div>
+        
         <div class="release">
-            <div class="release-version">
-                v0.1.0-beta.1
-                <span class="beta-badge">BETA</span>
-            </div>
-            <div class="release-date">Beta Release • TBD</div>
-            <p>First beta release of SPARK CLI with core workspace management, task tracking, and OKR functionality.</p>
-            
-            <div class="coming-soon">
-                <strong>🚧 Coming Soon</strong><br>
-                Binaries will be available here once the beta release is ready.
-            </div>
-            
-            <div class="download-links" style="display: none;">
-                <a href="/latest/spark-linux-x64" class="download-link">Linux x64</a>
-                <a href="/latest/spark-linux-arm64" class="download-link">Linux ARM64</a>
-                <a href="/latest/spark-darwin-x64" class="download-link">macOS Intel</a>
-                <a href="/latest/spark-darwin-arm64" class="download-link">macOS Apple Silicon</a>
+            <div class="release-version">All Releases</div>
+            <p>Browse all SPARK CLI releases, including beta versions and release notes.</p>
+            <div class="download-links">
+                <a href="https://github.com/spark-pm/spark-cli-bin/releases" class="download-link">Browse All Releases</a>
             </div>
         </div>
     </div>
@@ -158,5 +152,94 @@
         </ul>
         <p><a href="https://sparkpm.dev" style="color: #06b6d4;">Learn more about SPARK Framework →</a></p>
     </div>
+
+    <script>
+        async function loadReleases() {
+            try {
+                const response = await fetch('https://api.github.com/repos/spark-pm/spark-cli-bin/releases');
+                const releases = await response.json();
+                
+                const container = document.getElementById('releases-container');
+                const loading = document.getElementById('loading');
+                
+                if (releases.length === 0) {
+                    container.innerHTML = `
+                        <div class="release">
+                            <div class="release-version">No Releases Yet</div>
+                            <p>Releases will appear here once the first version is published.</p>
+                        </div>
+                    `;
+                    loading.style.display = 'none';
+                    return;
+                }
+                
+                // Show latest release
+                const latest = releases[0];
+                const isPrerelease = latest.prerelease;
+                const publishedDate = new Date(latest.published_at).toLocaleDateString();
+                
+                // Get available assets
+                const assets = latest.assets || [];
+                const availablePlatforms = [
+                    { name: 'Linux x64', file: 'spark-linux-x64' },
+                    { name: 'macOS Intel', file: 'spark-darwin-x64' },
+                    { name: 'macOS Apple Silicon', file: 'spark-darwin-arm64' }
+                ];
+                
+                const downloadLinks = availablePlatforms
+                    .filter(platform => assets.some(asset => asset.name === platform.file))
+                    .map(platform => {
+                        const asset = assets.find(asset => asset.name === platform.file);
+                        return `<a href="${asset.browser_download_url}" class="download-link">${platform.name}</a>`;
+                    })
+                    .join('');
+                
+                const fallbackLinks = availablePlatforms
+                    .map(platform => `<a href="/latest/${platform.file}" class="download-link">${platform.name}</a>`)
+                    .join('');
+                
+                container.innerHTML = `
+                    <div class="release">
+                        <div class="release-version">
+                            ${latest.tag_name}
+                            ${isPrerelease ? '<span class="beta-badge">BETA</span>' : ''}
+                        </div>
+                        <div class="release-date">Published ${publishedDate}</div>
+                        <p>${latest.body ? latest.body.split('\\n')[0] || 'Latest release of SPARK CLI' : 'Latest release of SPARK CLI'}</p>
+                        
+                        <div class="download-links">
+                            <a href="${latest.html_url}" class="download-link">View Release Notes</a>
+                            ${downloadLinks || fallbackLinks}
+                        </div>
+                    </div>
+                `;
+                
+                loading.style.display = 'none';
+                
+            } catch (error) {
+                console.error('Failed to load releases:', error);
+                const container = document.getElementById('releases-container');
+                const loading = document.getElementById('loading');
+                
+                container.innerHTML = `
+                    <div class="release">
+                        <div class="release-version">Latest Release</div>
+                        <p>Unable to load release information. View releases directly on GitHub.</p>
+                        <div class="download-links">
+                            <a href="https://github.com/spark-pm/spark-cli-bin/releases/latest" class="download-link">View Latest Release</a>
+                            <a href="/latest/spark-linux-x64" class="download-link">Linux x64</a>
+                            <a href="/latest/spark-darwin-x64" class="download-link">macOS Intel</a>
+                            <a href="/latest/spark-darwin-arm64" class="download-link">macOS Apple Silicon</a>
+                        </div>
+                    </div>
+                `;
+                
+                loading.style.display = 'none';
+            }
+        }
+        
+        // Load releases when page loads
+        document.addEventListener('DOMContentLoaded', loadReleases);
+    </script>
 </body>
 </html>
