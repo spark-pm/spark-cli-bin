@@ -1,6 +1,6 @@
 # SPARK CLI Binary Distribution
 
-Public repository for SPARK CLI binary distribution and community support, deployed at `releases.sparkpm.dev` via GitHub Pages.
+Public repository for SPARK CLI binary distribution and community support, deployed at `cli.sparkpm.dev` via GitHub Pages.
 
 ## 🚀 Purpose
 
@@ -37,14 +37,14 @@ spark-releases/
 
 1. **Repository settings** → Pages
 2. **Source**: GitHub Actions
-3. **Custom domain**: Configure `releases.sparkpm.dev`
+3. **Custom domain**: Configure `cli.sparkpm.dev`
 4. **Automatic deployment** on push to main branch
 
 ### 2. DNS Setup
 
 Add CNAME record:
 ```
-releases.sparkpm.dev → spark-pm.github.io
+cli.sparkpm.dev → spark-pm.github.io
 ```
 
 ### 3. SSL/Security
@@ -114,21 +114,21 @@ For beta releases (like `v0.1.0-beta.1`):
 ## 🌐 URLs
 
 ### Primary Endpoints
-- **Homepage**: `https://releases.sparkpm.dev/`
-- **Install Script**: `https://releases.sparkpm.dev/install.sh`
-- **Latest Binaries**: `https://releases.sparkpm.dev/latest/spark-{os}-{arch}`
+- **Homepage**: `https://cli.sparkpm.dev/`
+- **Install Script**: `https://cli.sparkpm.dev/install.sh`
+- **Latest Binaries**: `https://cli.sparkpm.dev/latest/spark-{os}-{arch}`
 
 ### Version-Specific
-- **Release Notes**: `https://releases.sparkpm.dev/v{version}/release-notes.html`
-- **Version Binaries**: `https://releases.sparkpm.dev/v{version}/spark-{os}-{arch}`
+- **Release Notes**: `https://cli.sparkpm.dev/v{version}/release-notes.html`
+- **Version Binaries**: `https://cli.sparkpm.dev/v{version}/spark-{os}-{arch}`
 
 ### Platform Examples
-- Linux x64: `https://releases.sparkpm.dev/latest/spark-linux-x64`
-- macOS ARM64: `https://releases.sparkpm.dev/latest/spark-darwin-arm64`
+- Linux x64: `https://cli.sparkpm.dev/latest/spark-linux-x64`
+- macOS ARM64: `https://cli.sparkpm.dev/latest/spark-darwin-arm64`
 
 ## 🔄 Installation Flow
 
-1. **User runs**: `curl -fsSL https://releases.sparkpm.dev/install.sh | bash`
+1. **User runs**: `curl -fsSL https://cli.sparkpm.dev/install.sh | bash`
 2. **Script detects** platform (OS + architecture)
 3. **Downloads binary** from `/latest/spark-{platform}`
 4. **Installs** to `/usr/local/bin/spark`

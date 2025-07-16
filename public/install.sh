@@ -5,9 +5,9 @@
 # No runtime dependencies required!
 #
 # Usage:
-#   curl -fsSL https://releases.sparkpm.dev/install.sh | bash
-#   curl -fsSL https://releases.sparkpm.dev/install.sh | bash -s -- --beta
-#   curl -fsSL https://releases.sparkpm.dev/install.sh | bash -s -- --latest
+#   curl -fsSL https://cli.sparkpm.dev/install.sh | bash
+#   curl -fsSL https://cli.sparkpm.dev/install.sh | bash -s -- --beta
+#   curl -fsSL https://cli.sparkpm.dev/install.sh | bash -s -- --latest
 
 set -e
 
@@ -43,13 +43,13 @@ elif [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
     ARCH="arm64"
 else
     echo "❌ Unsupported architecture: $ARCH"
-    echo "📥 Please download manually from: https://releases.sparkpm.dev"
+    echo "📥 Please download manually from: https://cli.sparkpm.dev"
     exit 1
 fi
 
 if [ "$OS" != "linux" ] && [ "$OS" != "darwin" ]; then
     echo "❌ Unsupported OS: $OS"
-    echo "📥 Please download manually from: https://releases.sparkpm.dev"
+    echo "📥 Please download manually from: https://cli.sparkpm.dev"
     exit 1
 fi
 
@@ -75,7 +75,7 @@ fi
 
 if [ -z "$LATEST_TAG" ]; then
     echo "❌ Could not find any releases!"
-    echo "📥 Please download manually from: https://releases.sparkpm.dev"
+    echo "📥 Please download manually from: https://cli.sparkpm.dev"
     exit 1
 fi
 
@@ -99,13 +99,13 @@ elif command -v wget &> /dev/null; then
 else
     echo "❌ Neither curl nor wget found!"
     echo "📥 Please install curl or wget, or download manually from:"
-    echo "   https://releases.sparkpm.dev"
+    echo "   https://cli.sparkpm.dev"
     exit 1
 fi
 
 if [ ! -f "spark" ] || [ ! -s "spark" ]; then
     echo "❌ Download failed!"
-    echo "📥 Please download manually from: https://releases.sparkpm.dev"
+    echo "📥 Please download manually from: https://cli.sparkpm.dev"
     exit 1
 fi
 
