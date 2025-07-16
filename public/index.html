@@ -1,301 +1,358 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SPARK CLI Releases</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            background: #0f0f0f;
-            color: #e4e4e7;
-            line-height: 1.6;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 20px;
-        }
-        .logo {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #06b6d4;
-            margin-bottom: 10px;
-        }
-        .tagline {
-            color: #a1a1aa;
-            font-size: 1.1em;
-        }
-        .install-section {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 24px;
-            margin: 30px 0;
-        }
-        .install-code {
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 16px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 14px;
-            color: #06b6d4;
-            margin: 16px 0;
-            overflow-x: auto;
-        }
-        .releases {
-            margin-top: 40px;
-        }
-        .release {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .release-version {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #06b6d4;
-            margin-bottom: 8px;
-        }
-        .release-date {
-            color: #a1a1aa;
-            font-size: 0.9em;
-            margin-bottom: 12px;
-        }
-        .download-links {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 16px;
-        }
-        .download-link {
-            background: #06b6d4;
-            color: #000;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 0.9em;
-            transition: background 0.2s;
-        }
-        .download-link:hover {
-            background: #0891b2;
-        }
-        .beta-badge {
-            background: #f59e0b;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-left: 8px;
-        }
-        .coming-soon {
-            background: #334155;
-            color: #94a3b8;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px dashed #475569;
-        }
-        
-        /* Styles for markdown-generated content */
-        .release-content {
-            color: #e4e4e7;
-            line-height: 1.6;
-        }
-        .release-content h2 {
-            color: #06b6d4;
-            border-bottom: 1px solid #333;
-            padding-bottom: 8px;
-            margin: 20px 0 12px 0;
-            font-size: 1.2em;
-        }
-        .release-content h3 {
-            color: #06b6d4;
-            margin: 16px 0 8px 0;
-            font-size: 1.1em;
-        }
-        .release-content ul {
-            margin: 8px 0;
-            padding-left: 20px;
-        }
-        .release-content li {
-            margin: 4px 0;
-            color: #d4d4d8;
-        }
-        .release-content strong {
-            color: #fbbf24;
-        }
-        .release-content code {
-            background: #000;
-            color: #06b6d4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.9em;
-        }
-        .release-content pre {
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 16px;
-            overflow-x: auto;
-            margin: 12px 0;
-        }
-        .release-content pre code {
-            background: none;
-            padding: 0;
-            border-radius: 0;
-        }
-        .release-content hr {
-            border: none;
-            border-top: 1px solid #333;
-            margin: 20px 0;
-        }
-        .release-content a {
-            color: #06b6d4;
-            text-decoration: none;
-        }
-        .release-content a:hover {
-            color: #0891b2;
-            text-decoration: underline;
-        }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: #0f0f0f;
+        color: #e4e4e7;
+        line-height: 1.6;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 20px;
+      }
+      .logo {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #06b6d4;
+        margin-bottom: 10px;
+      }
+      .tagline {
+        color: #a1a1aa;
+        font-size: 1.1em;
+      }
+      .install-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 24px;
+        margin: 30px 0;
+      }
+      .install-code {
+        background: #000;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 16px;
+        font-family: "Monaco", "Menlo", monospace;
+        font-size: 14px;
+        color: #06b6d4;
+        margin: 16px 0;
+        overflow-x: auto;
+      }
+      .releases {
+        margin-top: 40px;
+      }
+      .release {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .release-version {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #06b6d4;
+        margin-bottom: 8px;
+      }
+      .release-date {
+        color: #a1a1aa;
+        font-size: 0.9em;
+        margin-bottom: 12px;
+      }
+      .download-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .download-link {
+        background: #06b6d4;
+        color: #000;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.9em;
+        transition: background 0.2s;
+      }
+      .download-link:hover {
+        background: #0891b2;
+      }
+      .beta-badge {
+        background: #f59e0b;
+        color: #000;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-left: 8px;
+      }
+      .coming-soon {
+        background: #334155;
+        color: #94a3b8;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        margin: 20px 0;
+        border: 1px dashed #475569;
+      }
+
+      /* Styles for markdown-generated content */
+      .release-content {
+        color: #e4e4e7;
+        line-height: 1.6;
+      }
+      .release-content h2 {
+        color: #06b6d4;
+        border-bottom: 1px solid #333;
+        padding-bottom: 8px;
+        margin: 20px 0 12px 0;
+        font-size: 1.2em;
+      }
+      .release-content h3 {
+        color: #06b6d4;
+        margin: 16px 0 8px 0;
+        font-size: 1.1em;
+      }
+      .release-content ul {
+        margin: 8px 0;
+        padding-left: 20px;
+      }
+      .release-content li {
+        margin: 4px 0;
+        color: #d4d4d8;
+      }
+      .release-content strong {
+        color: #fbbf24;
+      }
+      .release-content code {
+        background: #000;
+        color: #06b6d4;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: "Monaco", "Menlo", monospace;
+        font-size: 0.9em;
+      }
+      .release-content pre {
+        background: #000;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 12px 0;
+      }
+      .release-content pre code {
+        background: none;
+        padding: 0;
+        border-radius: 0;
+      }
+      .release-content hr {
+        border: none;
+        border-top: 1px solid #333;
+        margin: 20px 0;
+      }
+      .release-content a {
+        color: #06b6d4;
+        text-decoration: none;
+      }
+      .release-content a:hover {
+        color: #0891b2;
+        text-decoration: underline;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <div class="logo">⚡ SPARK CLI</div>
-        <div class="tagline">Swift Product Acceleration through Rapid Knowledge</div>
+      <div class="logo">⚡ SPARK CLI</div>
+      <div class="tagline">
+        Swift Product Acceleration through Rapid Knowledge
+      </div>
     </div>
 
     <div class="install-section">
-        <h3>📖 What's SPARK?</h3>
-        <p>SPARK is a lightweight project management framework designed for high-velocity teams of 1-30 people. The CLI provides:</p>
-        <ul>
-            <li><strong>Workspace Management</strong> - Initialize and manage team workspaces</li>
-            <li><strong>Task Tracking</strong> - Kanban-style task management with pull-based workflow</li>
-            <li><strong>OKR Management</strong> - Quarterly objectives and key results tracking</li>
-            <li><strong>Team Collaboration</strong> - Multi-user workspaces with real-time sync</li>
-            <li><strong>AI-Agent Friendly</strong> - Designed for integration with AI development workflows</li>
-        </ul>
-        <p><a href="https://sparkpm.dev" style="color: #06b6d4;">Learn more about SPARK Framework →</a></p>
+      <h3>📖 What's SPARK?</h3>
+      <p>
+        SPARK is a lightweight project management framework designed for
+        high-velocity teams of 1-30 people. The CLI provides:
+      </p>
+      <ul>
+        <li>
+          <strong>Workspace Management</strong> - Initialize and manage team
+          workspaces
+        </li>
+        <li>
+          <strong>Task Tracking</strong> - Kanban-style task management with
+          pull-based workflow
+        </li>
+        <li>
+          <strong>OKR Management</strong> - Quarterly objectives and key results
+          tracking
+        </li>
+        <li>
+          <strong>Team Collaboration</strong> - Multi-user workspaces with
+          real-time sync
+        </li>
+        <li>
+          <strong>AI-Agent Friendly</strong> - Designed for integration with AI
+          development workflows
+        </li>
+      </ul>
+      <p>
+        <a href="https://sparkpm.dev" style="color: #06b6d4"
+          >Learn more about SPARK Framework →</a
+        >
+      </p>
     </div>
 
     <div class="install-section">
-        <h2>🚀 Quick Install</h2>
-        <p>Install SPARK CLI with a single command:</p>
-        
-        <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Linux & macOS</h3>
-        <div class="install-code">curl -fsSL https://releases.sparkpm.dev/install.sh | bash</div>
-        
-        <h3 style="color: #06b6d4; margin: 16px 0 8px 0;">Windows (WSL)</h3>
-        <div class="install-code"># First install WSL, then run the Linux command above</div>
-        
-        <p><strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64)</p>
-        <p><strong>Windows users:</strong> Please use <a href="https://docs.microsoft.com/en-us/windows/wsl/install" style="color: #06b6d4;">Windows Subsystem for Linux (WSL)</a> and follow the Linux installation instructions.</p>
+      <h2>🚀 Quick Install</h2>
+      <p>Install SPARK CLI with a single command:</p>
+
+      <h3 style="color: #06b6d4; margin: 16px 0 8px 0">Linux & macOS</h3>
+      <div class="install-code">
+        curl -fsSL https://cli.sparkpm.dev/install.sh | bash
+      </div>
+
+      <h3 style="color: #06b6d4; margin: 16px 0 8px 0">Windows (WSL)</h3>
+      <div class="install-code">
+        # First install WSL, then run the Linux command above
+      </div>
+
+      <p>
+        <strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64)
+      </p>
+      <p>
+        <strong>Windows users:</strong> Please use
+        <a
+          href="https://docs.microsoft.com/en-us/windows/wsl/install"
+          style="color: #06b6d4"
+          >Windows Subsystem for Linux (WSL)</a
+        >
+        and follow the Linux installation instructions.
+      </p>
     </div>
 
     <div class="releases">
-        <h2>📦 Releases</h2>
-        
-        <div id="loading" class="release">
-            <div class="release-version">Loading Releases...</div>
-            <p>Fetching latest release information from GitHub...</p>
+      <h2>📦 Releases</h2>
+
+      <div id="loading" class="release">
+        <div class="release-version">Loading Releases...</div>
+        <p>Fetching latest release information from GitHub...</p>
+      </div>
+
+      <div id="releases-container"></div>
+
+      <div class="release">
+        <div class="release-version">All Releases</div>
+        <p>
+          Browse all SPARK CLI releases, including beta versions and release
+          notes.
+        </p>
+        <div class="download-links">
+          <a
+            href="https://github.com/spark-pm/spark-cli-bin/releases"
+            class="download-link"
+            >Browse All Releases</a
+          >
         </div>
-        
-        <div id="releases-container"></div>
-        
-        <div class="release">
-            <div class="release-version">All Releases</div>
-            <p>Browse all SPARK CLI releases, including beta versions and release notes.</p>
-            <div class="download-links">
-                <a href="https://github.com/spark-pm/spark-cli-bin/releases" class="download-link">Browse All Releases</a>
-            </div>
-        </div>
+      </div>
     </div>
 
     <script>
-        // Convert markdown to HTML using ShowdownJS
-        function convertMarkdownToHtml(markdown) {
-            if (!markdown) return '';
-            
-            // Initialize ShowdownJS converter
-            const converter = new showdown.Converter({
-                headerLevelStart: 2,  // Start headers at h2 level
-                simplifiedAutoLink: true,
-                excludeTrailingPunctuationFromURLs: true,
-                strikethrough: true,
-                tables: true,
-                tasklists: true
-            });
-            
-            return converter.makeHtml(markdown);
-        }
+      // Convert markdown to HTML using ShowdownJS
+      function convertMarkdownToHtml(markdown) {
+        if (!markdown) return "";
 
-        async function loadReleases() {
-            try {
-                const response = await fetch('https://api.github.com/repos/spark-pm/spark-cli-bin/releases');
-                const releases = await response.json();
-                
-                const container = document.getElementById('releases-container');
-                const loading = document.getElementById('loading');
-                
-                if (releases.length === 0) {
-                    container.innerHTML = `
+        // Initialize ShowdownJS converter
+        const converter = new showdown.Converter({
+          headerLevelStart: 2, // Start headers at h2 level
+          simplifiedAutoLink: true,
+          excludeTrailingPunctuationFromURLs: true,
+          strikethrough: true,
+          tables: true,
+          tasklists: true,
+        });
+
+        return converter.makeHtml(markdown);
+      }
+
+      async function loadReleases() {
+        try {
+          const response = await fetch(
+            "https://api.github.com/repos/spark-pm/spark-cli-bin/releases"
+          );
+          const releases = await response.json();
+
+          const container = document.getElementById("releases-container");
+          const loading = document.getElementById("loading");
+
+          if (releases.length === 0) {
+            container.innerHTML = `
                         <div class="release">
                             <div class="release-version">No Releases Yet</div>
                             <p>Releases will appear here once the first version is published.</p>
                         </div>
                     `;
-                    loading.style.display = 'none';
-                    return;
-                }
-                
-                // Show latest release
-                const latest = releases[0];
-                const isPrerelease = latest.prerelease;
-                const publishedDate = new Date(latest.published_at).toLocaleDateString();
-                
-                // Get available assets
-                const assets = latest.assets || [];
-                const availablePlatforms = [
-                    { name: 'Linux x64', file: 'spark-linux-x64' },
-                    { name: 'macOS Intel', file: 'spark-darwin-x64' },
-                    { name: 'macOS Apple Silicon', file: 'spark-darwin-arm64' }
-                ];
-                
-                const downloadLinks = availablePlatforms
-                    .filter(platform => assets.some(asset => asset.name === platform.file))
-                    .map(platform => {
-                        const asset = assets.find(asset => asset.name === platform.file);
-                        return `<a href="${asset.browser_download_url}" class="download-link">${platform.name}</a>`;
-                    })
-                    .join('');
-                
-                const fallbackLinks = availablePlatforms
-                    .map(platform => `<a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/${platform.file}" class="download-link">${platform.name}</a>`)
-                    .join('');
-                
-                container.innerHTML = `
+            loading.style.display = "none";
+            return;
+          }
+
+          // Show latest release
+          const latest = releases[0];
+          const isPrerelease = latest.prerelease;
+          const publishedDate = new Date(
+            latest.published_at
+          ).toLocaleDateString();
+
+          // Get available assets
+          const assets = latest.assets || [];
+          const availablePlatforms = [
+            { name: "Linux x64", file: "spark-linux-x64" },
+            { name: "macOS Intel", file: "spark-darwin-x64" },
+            { name: "macOS Apple Silicon", file: "spark-darwin-arm64" },
+          ];
+
+          const downloadLinks = availablePlatforms
+            .filter((platform) =>
+              assets.some((asset) => asset.name === platform.file)
+            )
+            .map((platform) => {
+              const asset = assets.find(
+                (asset) => asset.name === platform.file
+              );
+              return `<a href="${asset.browser_download_url}" class="download-link">${platform.name}</a>`;
+            })
+            .join("");
+
+          const fallbackLinks = availablePlatforms
+            .map(
+              (platform) =>
+                `<a href="https://github.com/spark-pm/spark-cli-bin/releases/latest/download/${platform.file}" class="download-link">${platform.name}</a>`
+            )
+            .join("");
+
+          container.innerHTML = `
                     <div class="release">
                         <div class="release-version">
                             ${latest.tag_name}
-                            ${isPrerelease ? '<span class="beta-badge">BETA</span>' : ''}
+                            ${isPrerelease ? '<span class="beta-badge">BETA</span>' : ""}
                         </div>
                         <div class="release-date">Published ${publishedDate}</div>
                         
                         <div class="release-content">
-                            ${latest.body ? convertMarkdownToHtml(latest.body) : '<p>Latest release of SPARK CLI</p>'}
+                            ${latest.body ? convertMarkdownToHtml(latest.body) : "<p>Latest release of SPARK CLI</p>"}
                         </div>
                         
                         <div class="download-links">
@@ -304,15 +361,14 @@
                         </div>
                     </div>
                 `;
-                
-                loading.style.display = 'none';
-                
-            } catch (error) {
-                console.error('Failed to load releases:', error);
-                const container = document.getElementById('releases-container');
-                const loading = document.getElementById('loading');
-                
-                container.innerHTML = `
+
+          loading.style.display = "none";
+        } catch (error) {
+          console.error("Failed to load releases:", error);
+          const container = document.getElementById("releases-container");
+          const loading = document.getElementById("loading");
+
+          container.innerHTML = `
                     <div class="release">
                         <div class="release-version">Latest Release</div>
                         <p>Unable to load release information. View releases directly on GitHub.</p>
@@ -324,13 +380,13 @@
                         </div>
                     </div>
                 `;
-                
-                loading.style.display = 'none';
-            }
+
+          loading.style.display = "none";
         }
-        
-        // Load releases when page loads
-        document.addEventListener('DOMContentLoaded', loadReleases);
+      }
+
+      // Load releases when page loads
+      document.addEventListener("DOMContentLoaded", loadReleases);
     </script>
-</body>
+  </body>
 </html>

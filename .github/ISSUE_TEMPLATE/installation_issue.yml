@@ -49,7 +49,7 @@ body:
       label: Command Used
       description: What exact command did you run?
       render: shell
-      placeholder: "curl -fsSL https://releases.sparkpm.dev/install.sh | bash"
+      placeholder: "curl -fsSL https://cli.sparkpm.dev/install.sh | bash"
     validations:
       required: true
 
