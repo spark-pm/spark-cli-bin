@@ -1,194 +1,199 @@
-# SPARK CLI Binary Distribution
+# SPARK CLI - Official Release Distribution
 
-Public repository for SPARK CLI binary distribution and community support, deployed at `cli.sparkpm.dev` via GitHub Pages.
+**The definitive companion tool for the SPARK Framework**
 
-## 🚀 Purpose
+![SPARK CLI - Terminal-based project management for the AI era](https://img.shields.io/badge/SPARK-CLI-cyan?style=for-the-badge)
 
-- **Binary Distribution**: Serves compiled SPARK CLI binaries for all platforms
-- **Installation Script**: Provides the one-liner installation experience
-- **Release Portal**: Public-facing release notes and download page
-- **CDN Distribution**: Fast, global delivery of CLI assets
+> **SPARK CLI is the living proof that the SPARK Framework works.** While you can use SPARK Framework anywhere with any tools, SPARK CLI demonstrates its full power through revolutionary terminal-based project management that's built for human + AI collaboration.
 
-## 📁 Structure
+## 🚀 What is SPARK CLI?
 
-```
-spark-releases/
-├── public/                        # Netlify deployment folder
-│   ├── install.sh                 # One-liner installation script
-│   ├── index.html                 # Release portal homepage
-│   ├── latest/                    # Latest version binaries
-│   │   ├── spark-linux-x64
-│   │   ├── spark-linux-arm64
-│   │   ├── spark-darwin-x64
-│   │   └── spark-darwin-arm64
-│   └── v0.1.0-beta.1/            # Version-specific releases
-│       ├── spark-linux-x64
-│       ├── spark-linux-arm64
-│       ├── spark-darwin-x64
-│       ├── spark-darwin-arm64
-│       └── release-notes.html
-├── netlify.toml                   # Netlify configuration
-└── README.md                      # This file
-```
+SPARK CLI is the **definitive companion tool** for the [SPARK Framework](https://github.com/spark-pm/spark) - a lightweight project management methodology for high-velocity teams. This CLI tool:
 
-## 🔧 Deployment Setup
+- **Proves the Framework**: Living demonstration of SPARK Framework effectiveness
+- **Enables Terminal PM**: Revolutionary project management directly in your terminal
+- **Built for AI Era**: Designed for seamless human + AI collaboration workflows
+- **Eases Adoption**: Makes implementing SPARK Framework effortless for any team
 
-### 1. GitHub Pages Configuration
+## 🆚 SPARK CLI vs. Taskmaster AI
 
-1. **Repository settings** → Pages
-2. **Source**: GitHub Actions
-3. **Custom domain**: Configure `cli.sparkpm.dev`
-4. **Automatic deployment** on push to main branch
+Many people confuse SPARK CLI with Taskmaster AI. Here's the key difference:
 
-### 2. DNS Setup
+| Aspect | SPARK CLI | Taskmaster AI |
+|--------|-----------|---------------|
+| **Purpose** | Framework implementation & team collaboration | AI task automation & individual productivity |
+| **Focus** | Structured project management methodology | AI-driven task execution |
+| **Use Case** | Terminal-based PM with human + AI workflows | AI-powered task completion |
+| **Target** | Development teams using SPARK Framework | Individual developers wanting AI assistance |
+| **Methodology** | Implements proven SPARK Framework principles | AI-first automation approach |
+| **Collaboration** | Multi-user workspaces with role-based access | Individual productivity enhancement |
+| **Output** | Structured project data (JSON/YAML) | Task execution and automation |
 
-Add CNAME record:
-```
-cli.sparkpm.dev → spark-pm.github.io
-```
+**TL;DR**: SPARK CLI implements a project management framework. Taskmaster AI automates individual tasks. Different tools for different purposes.
 
-### 3. SSL/Security
+## 📦 Installation
 
-- GitHub Pages automatically provides SSL certificates
-- HTTPS enforcement enabled by default
-- Custom domain with automatic certificate provisioning
-
-## 📦 Release Process
-
-### Adding a New Release
-
-1. **Build binaries** in the main CLI repository:
-   ```bash
-   # In spark-cli/
-   bun run build  # Creates dist/spark
-   ```
-
-2. **Create version directory**:
-   ```bash
-   mkdir -p public/v1.0.0/
-   ```
-
-3. **Copy binaries** for each platform:
-   ```bash
-   # Build for each platform and copy
-   cp dist/spark-linux-x64 public/v1.0.0/
-   cp dist/spark-linux-arm64 public/v1.0.0/
-   cp dist/spark-darwin-x64 public/v1.0.0/
-   cp dist/spark-darwin-arm64 public/v1.0.0/
-   ```
-
-4. **Update latest symlinks**:
-   ```bash
-   # Update latest/ to point to new version
-   cp public/v1.0.0/* public/latest/
-   ```
-
-5. **Create release notes**:
-   ```bash
-   cp public/v0.1.0-beta.1/release-notes.html public/v1.0.0/
-   # Edit with new release information
-   ```
-
-6. **Update homepage** (`public/index.html`):
-   - Add new release section
-   - Update version numbers
-   - Enable download links if ready
-
-7. **Deploy**:
-   ```bash
-   git add .
-   git commit -m "Release v1.0.0"
-   git push origin main
-   # GitHub Actions automatically deploys to Pages
-   ```
-
-### Beta Releases
-
-For beta releases (like `v0.1.0-beta.1`):
-
-1. Follow same process as above
-2. Keep "Coming Soon" section until binaries are ready
-3. Use beta badges in HTML
-4. Don't update `/latest/` until stable release
-
-## 🌐 URLs
-
-### Primary Endpoints
-- **Homepage**: `https://cli.sparkpm.dev/`
-- **Install Script**: `https://cli.sparkpm.dev/install.sh`
-- **Latest Binaries**: `https://cli.sparkpm.dev/latest/spark-{os}-{arch}`
-
-### Version-Specific
-- **Release Notes**: `https://cli.sparkpm.dev/v{version}/release-notes.html`
-- **Version Binaries**: `https://cli.sparkpm.dev/v{version}/spark-{os}-{arch}`
-
-### Platform Examples
-- Linux x64: `https://cli.sparkpm.dev/latest/spark-linux-x64`
-- macOS ARM64: `https://cli.sparkpm.dev/latest/spark-darwin-arm64`
-
-## 🔄 Installation Flow
-
-1. **User runs**: `curl -fsSL https://cli.sparkpm.dev/install.sh | bash`
-2. **Script detects** platform (OS + architecture)
-3. **Downloads binary** from `/latest/spark-{platform}`
-4. **Installs** to `/usr/local/bin/spark`
-5. **Verifies** installation with `spark --version`
-
-## 📋 Maintenance
-
-### Regular Tasks
-
-- **Monitor usage**: Check GitHub Pages analytics and repo traffic
-- **Update binaries**: Keep `/latest/` current with stable releases  
-- **Security updates**: Ensure custom domain SSL remains current
-- **Performance**: GitHub's CDN provides global distribution
-
-### File Management
-
-- **Cleanup old versions**: Remove obsolete version directories periodically
-- **Binary verification**: Ensure all platform binaries are present and functional
-- **Link validation**: Verify all download links work correctly
-
-## 🛠️ Development
-
-### Local Testing
+### Quick Install (Recommended)
 
 ```bash
-# Serve locally for testing
-cd spark-releases
-python3 -m http.server 8000 --directory public
-# Visit http://localhost:8000
+curl -fsSL https://cli.sparkpm.dev/install.sh | bash
 ```
 
-### Validation Checklist
+### Manual Install
 
-Before deploying:
-- [ ] All binary files are present and executable
-- [ ] Install script works locally
-- [ ] Release notes are accurate and complete
-- [ ] Homepage reflects current release status
-- [ ] All links are functional
+```bash
+# Download for your platform
+curl -L https://cli.sparkpm.dev/latest/spark-linux-x64 -o spark
+sudo mv spark /usr/local/bin/spark
+sudo chmod +x /usr/local/bin/spark
+```
 
-## 🔒 Security
+### Platform Support
 
-- Binary integrity should be verified (consider adding checksums)
-- Install script should validate downloads
-- HTTPS-only distribution
-- Security headers configured via Netlify
+- **Linux**: x64, ARM64
+- **macOS**: Intel, Apple Silicon
+- **Windows**: Coming soon
+
+### Verify Installation
+
+```bash
+spark --version
+spark --help
+```
+
+## 🎯 Quick Start - Experience SPARK Framework
+
+### 1. Initialize Your First SPARK Workspace
+
+```bash
+spark init
+```
+
+This command starts the SPARK Framework adoption journey:
+- Creates workspace configuration
+- Sets up team collaboration
+- Guides through OKR creation
+- Establishes your first SPARK board
+
+### 2. Essential Commands
+
+```bash
+# Get help for any command
+spark --help
+spark task --help
+
+# View your SPARK board (Kanban-style)
+spark board
+
+# Create your first task
+spark task create "Set up development environment"
+
+# Pull a task to work on (SPARK's pull-based workflow)
+spark task pull
+
+# Track quarterly progress
+spark okr status
+```
+
+### 3. AI-Friendly Features
+
+SPARK CLI is built for the AI era with structured input/output:
+
+```bash
+# JSON output for AI processing
+spark board --json
+
+# Create tasks from structured data
+echo '{"title":"AI-generated task","tags":["ai","feature"]}' | spark task create --json
+
+# Batch operations for AI agents
+spark task list --json | jq '.[] | select(.status == "backlog")'
+```
+
+## 🌟 Why SPARK CLI Proves the Framework Works
+
+### 1. **Real-World Implementation**
+- We built SPARK CLI using SPARK Framework itself
+- Every feature demonstrates framework principles in action
+- Continuous dogfooding ensures methodology effectiveness
+
+### 2. **Terminal-Native Project Management**
+- Revolutionary approach to PM directly in developer environment
+- No context switching between tools
+- Integrates seamlessly with development workflows
+
+### 3. **Built for Human + AI Collaboration**
+- Structured data formats (JSON/YAML) for AI integration
+- Non-interactive modes for automated workflows
+- Clear APIs for AI agents to interact with project data
+
+### 4. **Scales with Your Team**
+- Individual developer productivity
+- Small team collaboration (1-10 people)
+- Growing team coordination (10-30 people)
+
+## 🛠️ Core SPARK Framework Features
+
+SPARK CLI implements the complete SPARK methodology:
+
+- **📋 4-Column Board**: Backlog → In Progress → Review → Done
+- **🎯 OKR Management**: Quarterly objectives with measurable key results
+- **🔄 Pull-Based Workflow**: Team members pull work when ready (no push)
+- **📊 Progress Tracking**: Visual indicators and progress bars
+- **👥 Team Collaboration**: Multi-user workspaces with role-based access
+- **🏷️ Tag Organization**: Flexible task categorization and filtering
+- **📝 Proposal System**: Structured decision-making process
+
+## 🤖 Perfect for AI-Assisted Development
+
+SPARK CLI is specifically designed for the AI era:
+
+### For AI Agents
+- **Structured I/O**: JSON/YAML input and output
+- **Predictable APIs**: Consistent command patterns
+- **Error Handling**: Machine-readable error messages
+- **Batch Operations**: Efficient bulk processing
+
+### For Human Developers
+- **Terminal Integration**: Works in your natural environment
+- **Rich UI**: Colors, tables, progress bars, and animations
+- **Interactive Prompts**: Guided workflows for complex operations
+- **External Editor**: Support for your preferred editor
+
+## 🔗 Resources
+
+- **📖 SPARK Framework Documentation**: [Main Repository](https://github.com/spark-pm/spark)
+- **🎓 Framework Guide**: [Complete implementation methodology](https://github.com/spark-pm/spark/blob/main/SPARK.md)
+- **📚 CLI Documentation**: [Comprehensive command reference](CLI-DOCUMENTATION.md)
+- **💬 Community Support**: GitHub Issues and Discussions
 
 ## 📞 Support
 
-For issues with SPARK CLI:
-1. **Report bugs**: Use GitHub Issues in this repository
-2. **Feature requests**: Submit via GitHub Issues
-3. **Installation problems**: Check Actions logs and test locally
-4. **Community support**: GitHub Discussions available
+### For SPARK CLI Issues
+- **🐛 Bug Reports**: [GitHub Issues](https://github.com/spark-pm/spark-releases/issues)
+- **💡 Feature Requests**: [GitHub Issues](https://github.com/spark-pm/spark-releases/issues)
+- **💬 Community**: [GitHub Discussions](https://github.com/spark-pm/spark-releases/discussions)
 
-For server/infrastructure issues:
-1. Check GitHub Actions deployment logs
-2. Verify DNS and SSL configuration  
-3. Test install script across platforms
+### For SPARK Framework Questions
+- **📖 Documentation**: [SPARK Framework Repository](https://github.com/spark-pm/spark)
+- **🎓 Implementation Help**: Framework guides and tutorials
+- **👥 Community**: Framework-specific discussions
+
+## 🎉 Join the Revolution
+
+**SPARK CLI proves that revolutionary project management is possible.** 
+
+Stop switching between tools. Stop losing context. Start managing projects where you actually work - in the terminal.
+
+**Experience the future of project management:**
+
+```bash
+curl -fsSL https://cli.sparkpm.dev/install.sh | bash
+spark init
+```
 
 ---
 
-This infrastructure enables professional, scalable distribution of SPARK CLI while maintaining control over the release process.
+**Built with ❤️ for high-velocity teams and AI-powered development workflows**
+
+*SPARK CLI - Where framework meets reality*
