@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SPARK CLI Releases</title>
+    <title>SPARK CLI - Terminal-Based Project Management</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <style>
       body {
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
         padding: 40px 20px;
         background: #0f0f0f;
@@ -18,70 +18,196 @@
       }
       .header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
         border-bottom: 1px solid #333;
-        padding-bottom: 20px;
+        padding-bottom: 30px;
       }
       .logo {
-        font-size: 2.5em;
+        font-size: 3em;
         font-weight: bold;
         color: #06b6d4;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
       .tagline {
         color: #a1a1aa;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+      }
+      .hero-value {
+        font-size: 1.4em;
+        font-weight: 600;
+        color: #fbbf24;
+        margin-bottom: 25px;
+        line-height: 1.4;
+      }
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      .cta-button {
+        background: #06b6d4;
+        color: #000;
+        text-decoration: none;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1em;
+        transition: all 0.2s;
+        border: 2px solid #06b6d4;
+      }
+      .cta-button:hover {
+        background: #0891b2;
+        border-color: #0891b2;
+      }
+      .cta-button.secondary {
+        background: transparent;
+        color: #06b6d4;
+        border: 2px solid #06b6d4;
+      }
+      .cta-button.secondary:hover {
+        background: #06b6d4;
+        color: #000;
+      }
+      .benefits-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 30px;
+        margin: 40px 0;
+      }
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 25px;
+      }
+      .benefit {
+        padding: 20px;
+        border-radius: 8px;
+        background: #262626;
+        border: 1px solid #404040;
+      }
+      .benefit-icon {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+      .benefit-title {
         font-size: 1.1em;
+        font-weight: 600;
+        color: #06b6d4;
+        margin-bottom: 8px;
+      }
+      .benefit-desc {
+        color: #d4d4d8;
+        font-size: 0.95em;
       }
       .install-section {
         background: #1a1a1a;
         border: 1px solid #333;
-        border-radius: 8px;
-        padding: 24px;
-        margin: 30px 0;
+        border-radius: 12px;
+        padding: 30px;
+        margin: 40px 0;
       }
       .install-code {
         background: #000;
         border: 1px solid #333;
-        border-radius: 6px;
-        padding: 16px;
+        border-radius: 8px;
+        padding: 18px;
         font-family: "Monaco", "Menlo", monospace;
-        font-size: 14px;
+        font-size: 15px;
         color: #06b6d4;
-        margin: 16px 0;
+        margin: 20px 0;
         overflow-x: auto;
       }
+      .quick-start {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 30px;
+        margin: 40px 0;
+      }
+      .step {
+        margin: 20px 0;
+        padding: 15px;
+        background: #262626;
+        border-radius: 8px;
+        border-left: 4px solid #06b6d4;
+      }
+      .step-number {
+        font-weight: bold;
+        color: #06b6d4;
+      }
+      .resources-section {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 30px;
+        margin: 40px 0;
+      }
+      .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .resource-link {
+        display: block;
+        padding: 20px;
+        background: #262626;
+        border: 1px solid #404040;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #e4e4e7;
+        transition: all 0.2s;
+      }
+      .resource-link:hover {
+        border-color: #06b6d4;
+        background: #2d2d2d;
+      }
+      .resource-title {
+        font-weight: 600;
+        color: #06b6d4;
+        margin-bottom: 8px;
+      }
+      .resource-desc {
+        font-size: 0.9em;
+        color: #a1a1aa;
+      }
       .releases {
-        margin-top: 40px;
+        margin-top: 50px;
       }
       .release {
         background: #1a1a1a;
         border: 1px solid #333;
-        border-radius: 8px;
-        padding: 20px;
-        margin: 20px 0;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 25px 0;
       }
       .release-version {
-        font-size: 1.3em;
+        font-size: 1.4em;
         font-weight: bold;
         color: #06b6d4;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
       }
       .release-date {
         color: #a1a1aa;
         font-size: 0.9em;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
       }
       .download-links {
         display: flex;
-        gap: 12px;
+        gap: 15px;
         flex-wrap: wrap;
-        margin-top: 16px;
+        margin-top: 20px;
       }
       .download-link {
         background: #06b6d4;
         color: #000;
         text-decoration: none;
-        padding: 8px 16px;
+        padding: 10px 20px;
         border-radius: 6px;
         font-weight: 500;
         font-size: 0.9em;
@@ -93,20 +219,11 @@
       .beta-badge {
         background: #f59e0b;
         color: #000;
-        padding: 2px 8px;
+        padding: 4px 12px;
         border-radius: 4px;
         font-size: 0.8em;
         font-weight: bold;
-        margin-left: 8px;
-      }
-      .coming-soon {
-        background: #334155;
-        color: #94a3b8;
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-        margin: 20px 0;
-        border: 1px dashed #475569;
+        margin-left: 10px;
       }
 
       /* Styles for markdown-generated content */
@@ -177,79 +294,120 @@
     <div class="header">
       <div class="logo">⚡ SPARK CLI</div>
       <div class="tagline">
-        Swift Product Acceleration through Rapid Knowledge
+        Revolutionary terminal-based project management
+      </div>
+      <div class="hero-value">
+        Bringing project management and team collaboration directly into your terminal - built for the AI era
+      </div>
+      <div class="cta-buttons">
+        <a href="#install" class="cta-button">Get Started</a>
+        <a href="CLI-DOCUMENTATION.md" class="cta-button secondary">Documentation</a>
       </div>
     </div>
 
-    <div class="install-section">
-      <h3>📖 What's SPARK?</h3>
-      <p>
-        SPARK is a lightweight project management framework designed for
-        high-velocity teams of 1-30 people. The CLI provides:
-      </p>
-      <ul>
-        <li>
-          <strong>Workspace Management</strong> - Initialize and manage team
-          workspaces
-        </li>
-        <li>
-          <strong>Task Tracking</strong> - Kanban-style task management with
-          pull-based workflow
-        </li>
-        <li>
-          <strong>OKR Management</strong> - Quarterly objectives and key results
-          tracking
-        </li>
-        <li>
-          <strong>Team Collaboration</strong> - Multi-user workspaces with
-          real-time sync
-        </li>
-        <li>
-          <strong>AI-Agent Friendly</strong> - Designed for integration with AI
-          development workflows
-        </li>
-      </ul>
-      <p>
-        <a href="https://sparkpm.dev" style="color: #06b6d4"
-          >Learn more about SPARK Framework →</a
-        >
-      </p>
+    <div class="benefits-section">
+      <h2 style="color: #06b6d4; margin-bottom: 10px; text-align: center;">Why SPARK CLI?</h2>
+      <div class="benefits-grid">
+        <div class="benefit">
+          <div class="benefit-icon">💻</div>
+          <div class="benefit-title">Terminal Native</div>
+          <div class="benefit-desc">No context switching. Manage projects where you code, in your natural developer environment.</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">🤖</div>
+          <div class="benefit-title">AI-Friendly</div>
+          <div class="benefit-desc">JSON/YAML I/O, structured data, and APIs perfect for AI agents and automation.</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">👥</div>
+          <div class="benefit-title">Team Collaboration</div>
+          <div class="benefit-desc">Multi-user workspaces with real-time sync. Everyone stays in their terminal.</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">🔄</div>
+          <div class="benefit-title">Pull-Based Workflow</div>
+          <div class="benefit-desc">Revolutionary task management. Team members pull work when ready, no interruptions.</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">⚡</div>
+          <div class="benefit-title">Developer-First</div>
+          <div class="benefit-desc">Built by developers, for developers. Integrates seamlessly with your existing workflow.</div>
+        </div>
+        <div class="benefit">
+          <div class="benefit-icon">🎯</div>
+          <div class="benefit-title">OKR Tracking</div>
+          <div class="benefit-desc">Quarterly objectives and key results tracking, right in your terminal.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="install-section">
-      <h2>🚀 Quick Install</h2>
-      <p>Install SPARK CLI with a single command:</p>
+    <div class="install-section" id="install">
+      <h2 style="color: #06b6d4; margin-bottom: 20px;">🚀 Get Started in 30 Seconds</h2>
+      <p>Install SPARK CLI and start your first workspace:</p>
 
-      <h3 style="color: #06b6d4; margin: 16px 0 8px 0">Linux & macOS</h3>
+      <h3 style="color: #06b6d4; margin: 20px 0 10px 0;">1. Install</h3>
       <div class="install-code">
         curl -fsSL https://cli.sparkpm.dev/install.sh | bash
       </div>
 
-      <h3 style="color: #06b6d4; margin: 16px 0 8px 0">Windows (WSL)</h3>
+      <h3 style="color: #06b6d4; margin: 20px 0 10px 0;">2. Initialize Your Workspace</h3>
       <div class="install-code">
-        # First install WSL, then run the Linux command above
+        spark init
       </div>
 
-      <p>
-        <strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64)
-      </p>
-      <p>
-        <strong>Windows users:</strong> Please use
-        <a
-          href="https://docs.microsoft.com/en-us/windows/wsl/install"
-          style="color: #06b6d4"
-          >Windows Subsystem for Linux (WSL)</a
-        >
-        and follow the Linux installation instructions.
+      <p style="margin-top: 20px;">
+        <strong>Supported platforms:</strong> Linux (x64), macOS (x64, arm64)<br>
+        <strong>Windows users:</strong> Use <a href="https://docs.microsoft.com/en-us/windows/wsl/install" style="color: #06b6d4;">WSL</a> and follow Linux instructions
       </p>
     </div>
 
+    <div class="quick-start">
+      <h2 style="color: #06b6d4; margin-bottom: 20px;">📋 Quick Start Guide</h2>
+      <div class="step">
+        <span class="step-number">1.</span> <strong>Initialize:</strong> <code>spark init</code> - Creates your workspace and guides you through setup
+      </div>
+      <div class="step">
+        <span class="step-number">2.</span> <strong>Create Task:</strong> <code>spark task create "My first task"</code> - Add work to your backlog
+      </div>
+      <div class="step">
+        <span class="step-number">3.</span> <strong>View Board:</strong> <code>spark board</code> - See your Kanban-style project board
+      </div>
+      <div class="step">
+        <span class="step-number">4.</span> <strong>Pull Work:</strong> <code>spark task pull</code> - Start working on a task
+      </div>
+      <div class="step">
+        <span class="step-number">5.</span> <strong>Get Help:</strong> <code>spark --help</code> - Discover all available commands
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <h2 style="color: #06b6d4; margin-bottom: 20px;">📚 Resources & Help</h2>
+      <div class="resources-grid">
+        <a href="CLI-DOCUMENTATION.md" class="resource-link">
+          <div class="resource-title">📖 CLI Documentation</div>
+          <div class="resource-desc">Complete command reference with examples and AI integration guide</div>
+        </a>
+        <a href="https://sparkpm.dev" class="resource-link">
+          <div class="resource-title">🎓 SPARK Framework</div>
+          <div class="resource-desc">Learn about the methodology behind SPARK CLI</div>
+        </a>
+        <a href="https://github.com/spark-pm/spark-cli-bin/issues" class="resource-link">
+          <div class="resource-title">🐛 Get Help</div>
+          <div class="resource-desc">Report bugs, ask questions, or request features</div>
+        </a>
+        <a href="https://github.com/spark-pm/spark-cli-bin/discussions" class="resource-link">
+          <div class="resource-title">💬 Community</div>
+          <div class="resource-desc">Join discussions with other SPARK CLI users</div>
+        </a>
+      </div>
+    </div>
+
     <div class="releases">
-      <h2>📦 Releases</h2>
+      <h2 style="color: #06b6d4; margin-bottom: 20px;">📦 Latest Release</h2>
 
       <div id="loading" class="release">
-        <div class="release-version">Loading Releases...</div>
-        <p>Fetching latest release information from GitHub...</p>
+        <div class="release-version">Loading Latest Release...</div>
+        <p>Fetching release information from GitHub...</p>
       </div>
 
       <div id="releases-container"></div>
@@ -257,8 +415,7 @@
       <div class="release">
         <div class="release-version">All Releases</div>
         <p>
-          Browse all SPARK CLI releases, including beta versions and release
-          notes.
+          Browse all SPARK CLI releases, including beta versions and detailed release notes.
         </p>
         <div class="download-links">
           <a
@@ -352,7 +509,7 @@
                         <div class="release-date">Published ${publishedDate}</div>
                         
                         <div class="release-content">
-                            ${latest.body ? convertMarkdownToHtml(latest.body) : "<p>Latest release of SPARK CLI</p>"}
+                            ${latest.body ? convertMarkdownToHtml(latest.body) : "<p>Latest release of SPARK CLI with new features and improvements.</p>"}
                         </div>
                         
                         <div class="download-links">
